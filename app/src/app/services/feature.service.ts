@@ -14,7 +14,7 @@ export class FeatureService {
   constructor(private http: HttpClient, private authService: AuthService, private snackBar: MatSnackBar) {
   }
 
-  getFeaturesByEnvironment(environment: string): Observable<FeatureModel[]> {
+  public getFeaturesByEnvironment(environment: string): Observable<FeatureModel[]> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
     }
@@ -22,7 +22,7 @@ export class FeatureService {
       .pipe(map(response => response.data));
   }
 
-  toggleFeature(environmentId: string, featureId: string, state: boolean) {
+  public toggleFeature(environmentId: string, featureId: string, state: boolean): void {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
     }
@@ -35,21 +35,24 @@ export class FeatureService {
     })
   }
 
-  createFeature(identifier: string, name: string, description: string) {
+  public createFeature(identifier: string, name: string, description: string): Observable<MessageResponse> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
     }
     return this.http.post<MessageResponse>(ENDPOINTS.CREATE_FEATURE, {identifier, name, description}, httpOptions);
   }
 
-  getFeature(featureId: string): Observable<FeatureDataResponse> {
+  public getFeature(featureId: string): Observable<FeatureDataResponse> {
     const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.authService.getToken()}`
+      }),
     }
     return this.http.get<FeatureDataResponse>(ENDPOINTS.FEATURE_BY_ID(featureId), httpOptions).pipe(map(response => response));
   }
 
-  deleteFeature(featureId: string) {
+  public deleteFeature(featureId: string): Observable<MessageResponse> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
     }

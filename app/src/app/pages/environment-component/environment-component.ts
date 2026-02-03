@@ -18,28 +18,28 @@ import {NavigationComponent} from '../../components/navigation-component/navigat
 })
 
 export class EnvironmentComponent implements OnInit{
-  environments: Observable<EnvironmentModel[]> | undefined;
-  user: UserModel | undefined;
-  isAdmin = false;
+  public environments: Observable<EnvironmentModel[]> | undefined;
+  private user: UserModel | undefined;
+  public isAdmin = false;
 
-  environmentForm = new FormGroup({
+  public environmentForm = new FormGroup({
     name: new FormControl('', Validators.required)
   })
 
   constructor(private environmentService: EnvironmentService, private authService: AuthService, private snackBar: MatSnackBar) {}
 
-  async ngOnInit() {
+  public async ngOnInit(): Promise<void> {
     this.loadEnvironments();
 
     this.user = await this.authService.authenticate();
     this.isAdmin = this.user.admin;
   }
 
-  loadEnvironments() {
+  public loadEnvironments(): void {
     this.environments = this.environmentService.getEnvironments().pipe((e) => e)
   }
 
-  createEnvironment() {
+  public createEnvironment(): void {
     if (this.environmentForm.invalid) return;
     this.environmentService.createEnvironment(this.environmentForm.value.name as string).subscribe((e) => {
       this.loadEnvironments();
@@ -48,7 +48,7 @@ export class EnvironmentComponent implements OnInit{
     })
   }
 
-  deleteEnvironment(id: string) {
+  public deleteEnvironment(id: string): void {
     this.environmentService.deleteEnvironment(id).subscribe((e) => {
       this.loadEnvironments();
       this.snackBar.open(e.message, "Ok")

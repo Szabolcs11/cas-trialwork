@@ -18,7 +18,7 @@ export class AuthService {
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {
   }
 
-  logIn(email: string, password: string) {
+  public logIn(email: string, password: string): void {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
@@ -38,7 +38,7 @@ export class AuthService {
     })
   }
 
-  changePassword(password: string, passwordAgain: string) {
+  public changePassword(password: string, passwordAgain: string): void {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.getToken()}`}),
     }
@@ -53,7 +53,7 @@ export class AuthService {
     })
   }
 
-  authenticate() {
+  public authenticate(): Promise<UserModel> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -69,15 +69,15 @@ export class AuthService {
     });
   }
 
-  logout(): void {
+  public logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
   }
 
-  getToken(): string | null {
+  public getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     const token = this.getToken();
     if (!token || this.isTokenExpired(token)) return false;
 
@@ -86,7 +86,7 @@ export class AuthService {
     return true;
   }
 
-  async getUser(): Promise<UserModel> {
+  public async getUser(): Promise<UserModel> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ export class AuthService {
     return this.user;
   }
 
-  isTokenExpired(token: string): boolean {
+  private isTokenExpired(token: string): boolean {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const expiry = payload.exp * 1000;

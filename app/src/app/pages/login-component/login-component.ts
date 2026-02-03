@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -19,18 +19,16 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   templateUrl: './login-component.html',
   styleUrl: './login-component.scss',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  ngOnInit() {}
-
-  loginForm = new FormGroup({
+  public loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
   });
 
-  onSubmit() {
+  public onSubmit(): void {
     if (this.loginForm.invalid) return;
     const value = this.loginForm.value as { email: string, password: string};
     this.auth.logIn(value.email, value.password)

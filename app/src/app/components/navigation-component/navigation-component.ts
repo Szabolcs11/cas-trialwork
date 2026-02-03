@@ -13,22 +13,22 @@ import {PATHS} from '../../core/constans/paths';
 })
 export class NavigationComponent implements OnInit {
   private router = inject(Router);
-  isMenuOpen = false;
-  isAdmin = false;
+  public isMenuOpen = false;
+  public isAdmin = false;
 
   constructor(private authService: AuthService, private snackBar: MatSnackBar) {
   }
 
-  async ngOnInit() {
+  public async ngOnInit(): Promise<void> {
     const user = await this.authService.getUser();
     if (user) this.isAdmin = user.admin;
   }
 
-  toggleMenu() {
+  public toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  logout(): void {
+  public logout(): void {
     this.authService.logout();
     this.snackBar.open("Successfully logged out", "Ok");
     this.router.navigate([PATHS.LOGIN]);

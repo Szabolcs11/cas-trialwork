@@ -11,7 +11,7 @@ export class UserService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-    getUsers(): Observable<UserModel[]> {
+    public getUsers(): Observable<UserModel[]> {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export class UserService {
         .pipe(map(response => response.data));
     }
 
-    deleteUser(id: string) {
+    public deleteUser(id: string): Observable<MessageResponse> {
       const httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
       }
@@ -34,7 +34,7 @@ export class UserService {
       );
     }
 
-    createUser(email: string, password: string) {
+    public createUser(email: string, password: string): Observable<MessageResponse> {
       const httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
       }

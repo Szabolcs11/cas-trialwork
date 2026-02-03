@@ -22,11 +22,11 @@ import {MatSlideToggleChange, MatSlideToggleModule} from '@angular/material/slid
 export class FeaturesComponent implements OnInit{
   private router = inject(Router);
 
-  environments: Observable<EnvironmentModel[]> | undefined;
-  features: Observable<FeatureModel[]> | undefined;
-  selectedEnvironment: EnvironmentModel = {id: '1', name: 'production', protected: false};
+  public environments: Observable<EnvironmentModel[]> | undefined;
+  public features: Observable<FeatureModel[]> | undefined;
+  public selectedEnvironment: EnvironmentModel = {id: '1', name: 'production', protected: false};
 
-  featureForm = new FormGroup({
+  public featureForm = new FormGroup({
     identifier: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required)
@@ -34,31 +34,31 @@ export class FeaturesComponent implements OnInit{
 
   constructor(private environmentService: EnvironmentService, private featureService: FeatureService, private snackBar: MatSnackBar) {}
 
-  async ngOnInit() {
+  public async ngOnInit(): Promise<void> {
     this.loadEnvironments();
     this.loadFeaturesByEnvironment();
   }
 
-  loadEnvironments() {
+  private loadEnvironments(): void {
     this.environments = this.environmentService.getEnvironments().pipe((e) => e)
   }
 
-  loadFeaturesByEnvironment() {
+  private loadFeaturesByEnvironment(): void {
     this.features = this.featureService.getFeaturesByEnvironment(this.selectedEnvironment.name);
   }
 
-  selectEnvironment(name: string, environmentId: string): void {
+  public selectEnvironment(name: string, environmentId: string): void {
     this.selectedEnvironment = {name: name, id: environmentId, protected: false}
     this.features = this.featureService.getFeaturesByEnvironment(name);
   }
 
-  onCheckboxChanges(featureId: string, event: MatSlideToggleChange) {
+  public onCheckboxChanges(featureId: string, event: MatSlideToggleChange): void {
     if (!this.selectedEnvironment) return;
     const checked = event.checked;
     this.featureService.toggleFeature(this.selectedEnvironment!.id, featureId, checked)
   }
 
-  createFeature() {
+  public createFeature(): void {
     if (this.featureForm.invalid) return;
     const values = this.featureForm.value;
     this.featureService.createFeature(values.identifier!, values.name!, values.description!).subscribe((e) => {
@@ -70,7 +70,7 @@ export class FeaturesComponent implements OnInit{
     })
   }
 
-  selectFeature(featureId: string) {
+  public selectFeature(featureId: string): void {
     this.router.navigate([PATHS.FEATURES, featureId])
   }
 }

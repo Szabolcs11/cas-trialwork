@@ -1,5 +1,4 @@
-import {inject, Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ENDPOINTS} from '../core/constans/endpoints';
 import {EnvironmentModel} from '../core/model/EnvironmentModel';
@@ -9,12 +8,11 @@ import {EnvironmentModelResponse, MessageResponse} from '../core/model/ApiRespon
 
 @Injectable({ providedIn: 'root' })
 export class EnvironmentService {
-  private router = inject(Router);
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  getEnvironments(): Observable<EnvironmentModel[]> {
+  public getEnvironments(): Observable<EnvironmentModel[]> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
     }
@@ -23,7 +21,7 @@ export class EnvironmentService {
       .pipe(map(response => response.data));
   }
 
-  createEnvironment(name: string): Observable<MessageResponse> {
+  public createEnvironment(name: string): Observable<MessageResponse> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
     }
@@ -34,7 +32,7 @@ export class EnvironmentService {
     );
   }
 
-  deleteEnvironment(id: string): Observable<MessageResponse> {
+  public deleteEnvironment(id: string): Observable<MessageResponse> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`}),
     }

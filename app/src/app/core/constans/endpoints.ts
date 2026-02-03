@@ -6,17 +6,17 @@ export const ENDPOINTS = {
   ME: apiUrl + "auth/me",
 
   USERS: apiUrl + "users",
-  USER: (id: string) => `${apiUrl}users/${id}`,
+  USER: (id: string): string => `${apiUrl}users/${id}`,
   CREATE_USERS: apiUrl + "users/create",
-  DELETE_USER: (id: string) => `${apiUrl}users/${id}/delete`,
+  DELETE_USER: (id: string): string => `${apiUrl}users/${id}/delete`,
 
   ENVIRONMENTS: apiUrl + "environments",
   ADD_ENVIRONMENT: apiUrl + "environments/create",
-  DELETE_ENVIRONMENT: (id: string) => `${apiUrl}environments/${id}/delete`,
+  DELETE_ENVIRONMENT: (id: string): string => `${apiUrl}environments/${id}/delete`,
 
-  FEATURE_BY_ID: (id: string) => `${apiUrl}features/${id}/data`,
-  FEATURES_ENVIRONMENT: (environment: string) => `${apiUrl}features/${environment}`,
-  FEATURE_UPDATE: (id: string) => `${apiUrl}features/${id}/toggle`,
+  FEATURE_BY_ID: (id: string): string => `${apiUrl}features/${id}/data`,
+  FEATURES_ENVIRONMENT: (environment: string): string => `${apiUrl}features/${environment}`,
+  FEATURE_UPDATE: (id: string): string => `${apiUrl}features/${id}/toggle`,
   CREATE_FEATURE: apiUrl + "features/create",
-  DELETE_FEATURE: (id: string) => `${apiUrl}features/${id}/delete`,
+  DELETE_FEATURE: (id: string): string => `${apiUrl}features/${id}/delete`,
 }

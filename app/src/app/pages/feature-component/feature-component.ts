@@ -18,21 +18,21 @@ import {MatIconModule} from '@angular/material/icon';
 })
 export class FeatureComponent implements OnInit{
   private router = inject(Router);
-  featureId!: number;
-  feature: Observable<FeatureDataResponse> | undefined;
+  private featureId!: number;
+  public feature: Observable<FeatureDataResponse> | undefined;
 
   constructor(private route: ActivatedRoute, private featureService: FeatureService, private snackBar: MatSnackBar, ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.featureId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadFeature();
   }
 
-  loadFeature() {
+  private loadFeature(): void {
     this.feature = this.featureService.getFeature(this.featureId.toString());
   }
 
-  deleteFeature() {
+  public deleteFeature(): void {
     this.featureService.deleteFeature(this.featureId.toString()).subscribe((e) => {
       this.snackBar.open(e.message, "Ok");
       if (e.success) {

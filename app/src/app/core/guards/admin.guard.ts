@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
-import { Router , CanActivateFn } from '@angular/router';
+import {Router, CanActivateFn, UrlTree} from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { PATHS } from '../constans/paths';
 
-export const adminGuard: CanActivateFn = async () => {
+export const adminGuard: CanActivateFn = async (): Promise<true | UrlTree> => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
