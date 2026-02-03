@@ -2,7 +2,6 @@ import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FeatureService} from '../../services/feature.service';
-import {FeatureModel} from '../../core/model/FeatureModel';
 import {Observable} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {PATHS} from '../../core/constans/paths';

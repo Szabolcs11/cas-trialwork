@@ -1,11 +1,11 @@
-import {inject, Injectable, signal} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { ENDPOINTS } from '../core/constans/endpoints';
 import {Router} from '@angular/router';
 import {PATHS} from '../core/constans/paths';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {UserModel} from '../core/model/UserModel';
-import {catchError, firstValueFrom, map, Observable, of, tap} from 'rxjs';
+import {firstValueFrom} from 'rxjs';
 import {AuthenticateResponse, LoginResponse, MessageResponse} from '../core/model/ApiResponseModel';
 
 @Injectable({ providedIn: 'root' })

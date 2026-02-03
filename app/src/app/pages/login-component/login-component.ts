@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../../services/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';

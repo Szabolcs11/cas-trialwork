@@ -2,7 +2,7 @@
 <section class="container">
   <h2>Environments</h2>
   @for (environment of environments | async; track environment.id) {
-    <div class="card" [class.selected]="environment.id == selectedEnvironment.id" (click)="selectEnvironment(environment.name, environment.id)">
+    <div class="card" [class.selected]="environment.id =&= selectedEnvironment.id" (click)="selectEnvironment(environment.name, environment.id)">
       <span class="title">{{ environment.name }}</span>
     </div>
   }
