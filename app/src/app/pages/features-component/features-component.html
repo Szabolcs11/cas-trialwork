@@ -1,0 +1,60 @@
+<app-navigation-component></app-navigation-component>
+<section class="container">
+  <h2>Environments</h2>
+  @for (environment of environments | async; track environment.id) {
+    <div class="card" [class.selected]="environment.id == selectedEnvironment.id" (click)="selectEnvironment(environment.name, environment.id)">
+      <span class="title">{{ environment.name }}</span>
+    </div>
+  }
+  <h2 class="basic-top-margin"><span>{{ selectedEnvironment.name }}</span> features</h2>
+  @for (feature of features | async; track feature.id) {
+    <div class="card" >
+      <span class="name" (click)="selectFeature(feature.id)">{{ feature.identifier }} <span>({{ feature.name }})</span></span>
+
+      <mat-slide-toggle [checked]="feature.enabled" (change)="onCheckboxChanges(feature.id, $event)">
+      </mat-slide-toggle>
+    </div>
+  }
+  <h2 class="basic-top-margin">Create new feature</h2>
+  <form class="form-group" [formGroup]="featureForm" (ngSubmit)="createFeature()">
+    <div class="form-input-container">
+      <div>
+        <label for="identifier">Identifier:</label>
+        <input
+          type="text"
+          placeholder="Identifier"
+          name="identifier"
+          formControlName="identifier"
+        />
+        @if (featureForm.get("identifier")?.invalid && featureForm.get("identifier")?.touched) {
+          <div>Valid identifier is required</div>
+        }
+      </div>
+      <div>
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          placeholder="Name"
+          name="name"
+          formControlName="name"
+        />
+        @if (featureForm.get("name")?.invalid && featureForm.get("name")?.touched) {
+          <div>Valid name is required</div>
+        }
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <input
+          type="text"
+          placeholder="Description"
+          name="description"
+          formControlName="description"
+        />
+        @if (featureForm.get("description")?.invalid && featureForm.get("description")?.touched) {
+          <div>Valid description is required</div>
+        }
+      </div>
+      <button type="submit">Add</button>
+    </div>
+  </form>
+</section>

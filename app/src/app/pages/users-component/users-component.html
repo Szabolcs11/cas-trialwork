@@ -1,0 +1,74 @@
+<app-navigation-component></app-navigation-component>
+<section class="container">
+  <h1>Users</h1>
+  <div class="card-container">
+    @for (user of users | async; track user.id) {
+      <div class="card">
+        <span class="title">{{ user.email }}</span>
+          <button
+            class="action"
+            type="button"
+            (click)="deleteUser(user.id)"
+            aria-label="Delete environment"
+            [disabled]="user.admin"
+          >
+            ✕
+          </button>
+      </div>
+    }
+  </div>
+  <h2>Create a new user</h2>
+  <form class="form-group" [formGroup]="userForm" (ngSubmit)="createUser()">
+    <div class="form-input-container">
+      <div>
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          placeholder="Email name"
+          name="email"
+          formControlName="email"
+        />
+        @if (userForm.get("email")?.invalid && userForm.get("email")?.touched) {
+          <div>Valid email is required</div>
+        }
+      </div>
+      <div>
+        <label for="password">Password:</label>
+
+        <div class="password-field">
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            formControlName="password"
+          />
+
+          <button
+            type="button"
+            class="icon-btn"
+            (click)="generatePassword()"
+            aria-label="Generate password"
+          >
+            <mat-icon>autorenew</mat-icon>
+          </button>
+
+          <button
+            type="button"
+            class="icon-btn"
+            (click)="copyPassword()"
+            aria-label="Copy password"
+            [disabled]="!userForm.get('password')?.value"
+          >
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+
+        @if (userForm.get("password")?.invalid && userForm.get("password")?.touched) {
+          <div>Valid password is required</div>
+        }
+      </div>
+
+      <button type="submit">Add</button>
+    </div>
+  </form>
+</section>

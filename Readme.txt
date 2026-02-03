@@ -1,0 +1,1 @@
+Indításhoz szükséges XAMPP

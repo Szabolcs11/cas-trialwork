@@ -1,0 +1,16 @@
+.form-group {
+  .password-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
+
+.icon-btn {
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}

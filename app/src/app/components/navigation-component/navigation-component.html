@@ -1,0 +1,15 @@
+<nav>
+  <button class="menu-toggle" aria-label="Toggle menu" (click)="toggleMenu()">☰</button>
+
+  <div class="nav-links" [class.open]="isMenuOpen">
+    <a routerLink="/environments" routerLinkActive="active">Environments</a>
+    <a routerLink="/features" routerLinkActive="active">Features</a>
+    @if (isAdmin) {
+      <a routerLink="/admin/users" routerLinkActive="active">Users</a>
+    }
+  </div>
+
+  <div class="nav-actions" [class.open]="isMenuOpen">
+    <button (click)="logout()">Logout</button>
+  </div>
+</nav>
