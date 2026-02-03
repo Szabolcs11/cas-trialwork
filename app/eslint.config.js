@@ -19,13 +19,16 @@ module.exports = defineConfig([
         "error",
         {
           accessibility: "explicit",
+          overrides: {
+            constructors: "off",
+          },
         },
       ],
       "@typescript-eslint/explicit-function-return-type": [
         "error",
         {
           allowExpressions: false,
-          allowTypedFunctionExpressions: false,
+          allowTypedFunctionExpressions: true,
           allowHigherOrderFunctions: false,
           allowDirectConstAssertionInArrowFunctions: false,
         },
