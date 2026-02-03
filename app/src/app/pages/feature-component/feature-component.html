@@ -1,0 +1,36 @@
+<app-navigation-component></app-navigation-component>
+<section class="container">
+  <h2>{{ (feature | async)?.data?.identifier }}</h2>
+
+  <p><span>Name: </span>{{ (feature | async)?.data?.name }}</p>
+  <p><span>Identifier: </span>{{ (feature | async)?.data?.identifier }}</p>
+  <p><span>Description: </span>{{ (feature | async)?.data?.description }}</p>
+
+  <button (click)="deleteFeature()">Delete feature</button>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Feature</th>
+      @for (env of (feature | async)?.environmentFeature; track env.environmentName) {
+        <th>{{ env.environmentName | titlecase }}</th>
+      }
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>{{ (feature | async)?.data?.name }}</td>
+
+      @for (env of (feature | async)?.environmentFeature; track env.environmentName) {
+        <td class="text-center">
+          <mat-icon color="{{ env.enabled ? 'primary' : 'warn' }}">
+            {{ env.enabled ? 'check' : 'close' }}
+          </mat-icon>
+        </td>
+      }
+    </tr>
+    </tbody>
+  </table>
+
+</section>

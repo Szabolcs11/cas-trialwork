@@ -1,0 +1,19 @@
+@use "./../../colors.scss" as *;
+
+h2 {
+  margin-top: 0;
+
+  &.basic-top-margin {
+    margin-top: 2rem;
+  }
+}
+
+.card {
+  margin: 1rem 0;
+  cursor: pointer;
+
+  &.selected {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.2);
+  }
+}

@@ -1,0 +1,36 @@
+<app-navigation-component></app-navigation-component>
+<section class="container">
+  <h1>Environments</h1>
+
+  @if (isAdmin) {
+    <form class="form-group" [formGroup]="environmentForm" (ngSubmit)="createEnvironment()">
+      <input
+        type="text"
+        placeholder="New environment name"
+        name="name"
+        formControlName="name"
+      />
+      <button type="submit">Add</button>
+    </form>
+  }
+
+  <div class="card-container">
+    @for (environment of environments | async; track environment.id) {
+      <div class="card" [class.disabled]="environment.protected && isAdmin">
+        <span class="title">{{ environment.name }}</span>
+
+        @if (isAdmin) {
+          <button
+            class="action"
+            type="button"
+            (click)="deleteEnvironment(environment.id)"
+            aria-label="Delete environment"
+            [disabled]="environment.protected"
+          >
+            ✕
+          </button>
+        }
+      </div>
+    }
+  </div>
+</section>
